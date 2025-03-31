@@ -1,15 +1,15 @@
 package com.jffcm.desafio_itau_backend.config;
 
-import com.jffcm.desafio_itau_backend.application.gateways.TransactionRepository
+import com.jffcm.desafio_itau_backend.application.repository.TransactionRepository
 import com.jffcm.desafio_itau_backend.application.usecases.DeleteAllTransactionsUseCase
+import com.jffcm.desafio_itau_backend.application.usecases.GetStatisticsUseCase
 import com.jffcm.desafio_itau_backend.application.usecases.ReceiveTransactionUseCase
-import com.jffcm.desafio_itau_backend.infrastructure.gateways.InMemoryTransactionRepository
+import com.jffcm.desafio_itau_backend.infrastructure.repository.InMemoryTransactionRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 class TransactionConfig {
-
     @Bean
     fun receiveTransactionUseCase(transactionRepository: TransactionRepository): ReceiveTransactionUseCase {
         return ReceiveTransactionUseCase(transactionRepository)
@@ -18,6 +18,11 @@ class TransactionConfig {
     @Bean
     fun deleteAllTransactionsUseCase(transactionRepository: TransactionRepository): DeleteAllTransactionsUseCase {
         return DeleteAllTransactionsUseCase(transactionRepository)
+    }
+
+    @Bean
+    fun getStatisticsUseCase(transactionRepository: TransactionRepository): GetStatisticsUseCase {
+        return GetStatisticsUseCase(transactionRepository)
     }
 
     @Bean
